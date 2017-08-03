@@ -1,6 +1,6 @@
 ## Introduction
 
-A virtual machine for testing the [Open Journal Systems](http://pkp.sfu.ca/ojs/) 3.x PKP PLN plugin. It should work on any operating system that supports VirtualBox and Vagrant.
+A virtual machine for converting OJS 2.x native XML to OJS 3.x XML.
 
 This virtual machine **should not** be used in production.
 
