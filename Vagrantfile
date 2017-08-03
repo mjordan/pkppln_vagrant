@@ -23,5 +23,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, path: "./scripts/setup.sh"
   config.vm.provision :shell, path: "./scripts/ojs.sh"
-  config.vm.provision :shell, path: "./scripts/pkppln.sh"
 end
