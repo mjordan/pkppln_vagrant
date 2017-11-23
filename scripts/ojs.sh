@@ -1,22 +1,27 @@
 echo "Installing OJS"
 cd /home/vagrant/ojswww
 
-# Clone the OJS repository
+
+# Clone the OJS repository and run composer where required.
 git clone https://github.com/pkp/ojs .
-git checkout ojs-stable-3_0_2
+git checkout ojs-stable-3_1_0
 git submodule update --init --recursive
 
+cd lib/pkp
+/usr/bin/composer update
+cd /home/vagrant/ojswww/plugins/paymethod/paypal
+/usr/bin/composer update
+cd /home/vagrant/ojswww/plugins/generic/citationStyleLanguage
+/usr/bin/composer update
+
 # Prepare OJS environment
+cd /home/vagrant/ojswww
 cp /vagrant/ojs_config.inc.php config.inc.php
 chmod o+w config.inc.php
 mkdir /home/vagrant/ojsfiles
 mkdir /home/vagrant/ojsfiles/scheduledTaskLogs
 chown -R www-data:www-data /home/vagrant/ojsfiles
 sudo chown -R www-data cache public /home/vagrant/ojsfiles config.inc.php
-
-# Install Composer dependencies
-cd lib/pkp
-/usr/bin/composer -q update
 
 # Set up the OJS database
 echo "CREATE DATABASE ojs DEFAULT CHARSET utf8" | mysql -uroot -pojs
@@ -33,6 +38,13 @@ cd plugins/generic
 git clone https://github.com/defstat/pln.git
 cd pln
 /usr/bin/composer -q install
+
+# Required by OJS for JS/CSS asset management
+cd /home/vagrant/ojswww
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+npm install
+npm run build
 
 # Load test data
 echo "Loading OJS test data"

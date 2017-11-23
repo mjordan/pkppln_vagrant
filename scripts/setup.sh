@@ -18,9 +18,6 @@ cp /vagrant/apache_configs/ports.conf /etc/apache2/ports.conf
 
 service apache2 restart
 
-# Required by the PKP PLN staging server
-apt-get install -y clamav clamav-daemon
-
 # Install composer
 curl -Ss https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer

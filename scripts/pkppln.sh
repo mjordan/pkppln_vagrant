@@ -1,5 +1,8 @@
 echo "Installing the PKP PLN staging server"
 
+# Required by the PKP PLN staging server
+apt-get install -y clamav clamav-daemon
+
 # Create the PLN staging server database
 echo "CREATE DATABASE symfony DEFAULT CHARSET utf8" | mysql -uroot -pojs
 
